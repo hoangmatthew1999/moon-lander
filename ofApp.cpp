@@ -72,6 +72,7 @@ void ofApp::setup(){
 
     lander.loadModel("geo/lander.obj");//loaded the lander
     lander.setScaleNormalization(false);
+	lander.setPosition(5,5,0);
 
 
 	boundingBox = meshBounds(terrain.getMesh(0));
@@ -85,7 +86,7 @@ void ofApp::setup(){
 //
 void ofApp::update() {
 	pos = lander.getPosition();
-	lander.setPosition(0,pos.y + 0.01 ,0);//the gravity 
+	lander.setPosition(0,pos.y - 0.01 * velocity,0);//the gravity 
 	
 }
 //--------------------------------------------------------------
@@ -259,6 +260,8 @@ void ofApp::keyReleased(int key) {
 	case OF_KEY_UP:
 		lander.setPosition(0,pos.y + (velocity * 1),0);
 		cam.setDistance(20);
+		fuel = fuel - 1;
+		cout<<fuel<<endl;
 		break;
 	case OF_KEY_DOWN:
 		lander.setPosition(0,pos.y - (velocity * 1),0);
